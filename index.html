@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0f0f1a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>PhotoSwipe – Organiza tu Galería</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== PANTALLA DE INICIO ===== -->
+  <div id="screen-start" class="screen active">
+    <div class="start-glow"></div>
+    <div class="start-content">
+      <div class="app-icon">📷</div>
+      <h1 class="app-title">PhotoSwipe</h1>
+      <p class="app-subtitle">Organiza tu galería con un deslizamiento</p>
+
+      <div class="swipe-hints">
+        <div class="hint hint-left">
+          <span class="hint-icon">👈</span>
+          <span class="hint-text">Izquierda<br><strong>Borrar</strong></span>
+        </div>
+        <div class="hint-divider">vs</div>
+        <div class="hint hint-right">
+          <span class="hint-text">Derecha<br><strong>Guardar</strong></span>
+          <span class="hint-icon">👉</span>
+        </div>
+      </div>
+
+      <label id="btn-load" class="btn-primary" for="file-input">
+        <span>📁</span> Cargar Fotos
+      </label>
+      <input type="file" id="file-input" accept="image/*" multiple hidden />
+
+      <p class="privacy-note">🔒 Las fotos nunca salen de tu dispositivo</p>
+    </div>
+  </div>
+
+  <!-- ===== PANTALLA DE SWIPE ===== -->
+  <div id="screen-swipe" class="screen">
+    <div class="swipe-header">
+      <button id="btn-back" class="icon-btn" aria-label="Volver">←</button>
+      <div class="progress-info">
+        <span id="current-index">1</span> / <span id="total-count">0</span>
+      </div>
+      <div class="score-badge">
+        <span id="saved-count">0</span> guardadas
+      </div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
+
+    <div id="card-stack" class="card-stack">
+      <!-- Las tarjetas de fotos se insertan aquí dinámicamente -->
+      <div id="empty-state" class="empty-state">
+        <span>✨</span>
+        <p>¡Has revisado todas las fotos!</p>
+      </div>
+    </div>
+
+    <!-- Overlay de decisión (visible durante el arrastre) -->
+    <div id="overlay-save" class="decision-overlay overlay-save">GUARDAR ✅</div>
+    <div id="overlay-delete" class="decision-overlay overlay-delete">BORRAR ❌</div>
+
+    <div class="action-buttons">
+      <button id="btn-delete" class="action-btn btn-del" aria-label="Borrar foto">
+        <span class="action-icon">✕</span>
+      </button>
+      <button id="btn-undo" class="action-btn btn-undo" aria-label="Deshacer" disabled>
+        <span class="action-icon">↺</span>
+      </button>
+      <button id="btn-save" class="action-btn btn-sav" aria-label="Guardar foto">
+        <span class="action-icon">♥</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== PANTALLA DE RESULTADOS ===== -->
+  <div id="screen-result" class="screen">
+    <div class="result-header">
+      <h2 class="result-title">Revisión completa 🎉</h2>
+    </div>
+    <div class="result-stats">
+      <div class="stat stat-saved">
+        <span class="stat-num" id="res-saved">0</span>
+        <span class="stat-label">Guardadas</span>
+      </div>
+      <div class="stat stat-deleted">
+        <span class="stat-num" id="res-deleted">0</span>
+        <span class="stat-label">Borradas</span>
+      </div>
+    </div>
+
+    <div class="result-grid-label">Fotos guardadas:</div>
+    <div id="result-grid" class="result-grid"></div>
+
+    <div class="result-actions">
+      <button id="btn-download-all" class="btn-primary">
+        <span>⬇️</span> Descargar guardadas
+      </button>
+      <button id="btn-restart" class="btn-secondary">
+        <span>🔄</span> Empezar de nuevo
+      </button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
